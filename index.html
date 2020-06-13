@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Snipp - Free Bootstrap 4 Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/ionicons.min.css">
+
+  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+  <link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="css/icomoon.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <link href="css/mfb.css" rel="stylesheet">
+  <script src="js/mfb.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=yFffIYhmflQRZq2UJl5mstyiwHm-O0MznBcsTvLT3gFrUym3LOgnB5gc0OaTSuDRGtk-mCehwvMLBMC7xGqIDuqkNA1Abr7B69iIaHHB5Q3Y2ZQWmD_k3ROh5xOHUJN_-9-z3jg2xVylfHjDEy6KK51uAHECXHL9oMowWSBZyMKH7Byzuk3BXIl0kkzO2-qkJG-2YtqsVbVA6OTiLTchzi0-hVyokLPZt7tgD4J39RFnPqDFZgWIDuJZvyblrJvA8JuHQZUqLkuAVV-FalMl7pM2yc24bx0kCeaREXVgXf2Xa-y8NRjfXD-OLPX8daxgLRR_PlsCToQRf2im0lOSSzP7WYzAb86aUdviVPnuIRkoJwp0vrT3hz6I1ypWLQ_c8qTCD5-hKDgoopfxiT8LQKwQah8DQ85M4wU3oF0MyjycqwBhIlw5MjshkL1gxhL01UG9PhdZ2AI4r8uorN6QeA"
+    charset="UTF-8"></script>
+  <link href="https://codepen.io/nk950357/pen/ExabZBq.css" rel="stylesheet">
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+    rel="stylesheet" type="text/css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5.1/jquery.googlemap.js"></script>
+
+
+
+  <script>
+    var d, geocoder, map, address, besearch = [],
+      count = 0,
+      isfirst = 0,
+      searchmode = false;
+
+    //下面是將google sheet轉換成Json的檔案讀入後分割
+    $.get(
+      'https://spreadsheets.google.com/feeds/list/1hJtaTf1e2gbqn-Ap2uw9XdGN-B_p__PnDJhKxuwA6oE/1/public/values?alt=json',
+      function (data) {
+        d = data.feed.entry;
+        console.log(d);
+        isfirst = 1;
+        showgoods("全部商品"); //載入網頁後呼叫顯示商品的程式碼
+      }
+    );
+
+    function showgoods(category) { //可以透過引入函數來篩選分類
+      var showit = false;
+      var i_value = -1;
+      $("#item1").empty(); //每次顯示商品前先把畫面清除
+      $("#item2").empty();
+      $("#item3").empty();
+      $("#item4").empty();
+      for (var i in d) {
+        if (searchmode) { //搜尋模式下選擇是否讓商品顯示
+          if (besearch.includes(i)) {
+            showit = true;
+          } else {
+            showit = false;
+          }
+        } else {
+          if (category != "全部商品") { //如果不是顯示全部商品的選項
+            if (d[i].gsx$category.$t === category) { //如果符合我們要顯示的分類
+              showit = true; //顯示的bool就是true
+            } else
+              showit = false;
+          } else {
+            showit = true;
+          }
+        }
+        if (showit) {
+          i_value++; //顯示的位置
+          var content = "<a href=" + '"' +
+            "#myModal" + i + '"' + "data-toggle=" + '"' + "modal" + '"' + "data-target=" + '"' + "#myModal" + i +
+            '"' + "onclick=" + '"initnewmap(' + "'map" + i + "'" + ',' + "'" + d[i].gsx$location.$t + "'" + ')"' +
+            "class=" + '"' + "featured-img" + '"' + ">" +
+            "<div class=" + '"' + "text-1 p-4 d-flex align-items-center" + '"' + ">" +
+            "<h3>" + d[i].gsx$name.$t + "<br><span class=" + "tag" + ">" + d[i].gsx$category.$t +
+            "</span></h3></div>" +
+            "<img src=" + '"' + d[i].gsx$photo.$t + '"' + "class=" + '"' + "img-fluid" + '"' + "alt=" + '""' + ">" +
+            "<div class=" + '"' + "text p-4 d-flex align-items-center" + '"' + ">" +
+            "<div class=" + '"' + "user d-flex align-items-center" + '"' + ">" +
+            "<div class=" + '"' + "user-img mr-3" + '"' + "style=" + '"' +
+            "background-image: url(" + d[i].gsx$fbphoto.$t + ");" + '"' +
+            "></div>" +
+            "<h3>" + d[i].gsx$price.$t + "<br><span class=" + '"' + "position" + '"' + '>' + "賣家:" + d[i]
+            .gsx$fbname.$t + "</span></h3>" +
+            "</div></div></a>";
+
+          var tempmodal =
+            "<div class=" + '"' + "modal fade " + "myModal" + i + '"' + "tabindex=" + '"' + "-1" + '"' + "role=" +
+            '"' + "dialog" + '"' + "aria-labelledby=" + '"' + "myModal" + i + '"' + "aria-hidden=" + '"' + "true" +
+            '"' + "id=" + '"' +
+            "myModal" + i + '"' + ">" + "<div class=" + '"modal-dialog modal-dialog-centered modal-lg"' + ">" +
+            "<div class=" +
+            '"modal-content"' + ">" + "<div class=" + '"modal-header"' + ">" + "<h3 class=" +
+            '"modal-title"' + ">" + d[i].gsx$name.$t + "的詳細資料</h3>" + "</div>" + "<div class=" + '"modal-body"' +
+            ">" + "<div class =" + '"' + "row" + '"' + ">" + "<div class =" + '"' + "col-md-6 align-self-center" + '"' +
+            ">" +
+            "<img src=" + '"' + d[i].gsx$photo.$t + '"' + "width = " + '"' + "100%" + '"' + ">" + "</div>" +
+            "<div class =" + '"' + "col-md-6 align-self-center" + '"' + ">" + "<div><h3>價格:" +
+            d[i].gsx$price.$t + "</h3></div>" + '<div class="row"> <div class = "col-md-6">賣家:' + d[i]
+            .gsx$fbname.$t + "</div>" + '<div class = "col-md-6" style="text-align: right">' +
+            '<a target="_blank"  href="' + d[i]
+            .gsx$userlink.$t + '"><span><i class="fab fa-facebook"></i>  聯絡賣家</span></a>' +
+            '</div></div>' +
+            "<div class=" + '"jumbotron"' + ">" + "<p>" + d[i].gsx$description.$t + "</p>" + "</div>" +
+            "<div>面交地點:" + d[i].gsx$locationname.$t + "<br><br>地址:" + d[i].gsx$location.$t + "</div>" +
+            "<div id=" + '"' + "map" + i + '"' + " style=" + '"width:auto;height:300px"' + "></div></div></div>";
+
+          count = i_value;
+          var temp = i_value % 4;
+          switch (temp) {
+            case 0:
+              document.getElementById("item1").innerHTML += content
+              document.getElementById("modal1").innerHTML += tempmodal
+              break;
+            case 1:
+              document.getElementById("item2").innerHTML += content
+              document.getElementById("modal1").innerHTML += tempmodal
+              break;
+            case 2:
+              document.getElementById("item3").innerHTML += content
+              document.getElementById("modal1").innerHTML += tempmodal
+              break;
+            case 3:
+              document.getElementById("item4").innerHTML += content
+              document.getElementById("modal1").innerHTML += tempmodal
+              break;
+          }
+        }
+      }
+      if (isfirst) {
+        document.getElementById("section-counter").setAttribute('data-number', count); //
+        isfirst = 0;
+      }
+    }
+
+    function dosearch(string) {
+      window.location.href = "#itemarea"; //每次搜尋直接跳到商品畫面
+      string = string.toLowerCase();
+      for (var i in d) {
+        var searchtemp = d[i].gsx$name.$t.toLowerCase();
+        if (string != '' && searchtemp.indexOf(string) >= 0) {
+          besearch.push(i);
+          searchmode = true;
+          showgoods("全部商品");
+        }
+      }
+      var isempty = string == '' || string == undefined || string == null;
+      if (isempty) {
+        showgoods("全部商品");
+      } else if (besearch.length === 0) {
+        alert("沒有這東西");
+        showgoods("全部商品");
+      }
+      searchmode = false;
+      besearch = [];
+    }
+  </script>
+  <style>
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      /* Preferred icon size */
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+
+      /* Support for all WebKit browsers. */
+      -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+      text-rendering: optimizeLegibility;
+
+      /* Support for Firefox. */
+      -moz-osx-font-smoothing: grayscale;
+
+      /* Support for IE. */
+      font-feature-settings: 'liga';
+    }
+
+    .modal {
+      max-width: 100%;
+    }
+
+
+    .fb-messenger {
+      margin: 30px 5px 20px;
+    }
+
+    .fb-messenger span {
+      border-radius: 4px;
+      background: #0084ff;
+      color: #fff;
+      font-size: 13px;
+      padding: 6px 8px;
+      display: inline-block;
+      font-family: helvetica, arial, sans-serifnn;
+      white-space: nowrap;
+    }
+
+    .fb-messenger a {
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <!--這裡是floating button的程式碼-->
+  <ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+    <li class="mfb-component__wrap">
+      <a onclick="showgoods('全部商品')" data-mfb-label="所有商品" class="mfb-component__button--main">
+        <i class="fas fa-filter mfb-component__main-icon--resting"></i>
+        <i class="fas fa-home mfb-component__main-icon--active ion-close-round"></i>
+      </a>
+
+      <!--dat-mfb-label是floating button的標籤-->
+      <ul class="mfb-component__list">
+        <li>
+          <a onclick="showgoods('電腦、筆電及家電')" data-mfb-label="電腦、筆電及家電" class="mfb-component__button--child">
+            <i class="fas fa-laptop mfb-component__child-icon "></i>
+          </a>
+        </li>
+
+        <li>
+          <a onclick="showgoods('手機及周邊')" data-mfb-label="手機及周邊" class="mfb-component__button--child">
+            <i class="fas fa-mobile-alt mfb-component__child-icon "></i>
+          </a>
+        </li>
+
+        <li>
+          <a onclick="showgoods('日用品、書籍及食品')" data-mfb-label="日用品、書籍及食品"" class=" mfb-component__button--child">
+            <i class="fas fa-motorcycle mfb-component__child-icon "></i>
+          </a>
+        </li>
+
+        <li>
+          <a onclick="showgoods('其他')" data-mfb-label="其他" class="mfb-component__button--child">
+            <i class="fas fa-plus mfb-component__child-icon "></i>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="">雲科人真D很愛買</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="#particles-js" class="nav-link">首頁</a></li>
+          <li class="nav-item"><a href="#itemarea" class="nav-link">所有商品</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">搜尋商品</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item">
+                <div class="input-group mb-3">
+                  <input type="search" id="searchbox" class="form-control" placeholder="搜尋商品" aria-label="搜尋商品"
+                    aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="dosearch($('#searchbox').val())"
+                      id="button-addon2">搜尋</button>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item cta"><a href="sell.html" class="nav-link"><span>我要賣東西!</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <!--放modal的div-->
+  <div id="modal1"></div>
+
+
+  <div class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+        <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+          <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+            隨時隨地、無論何處<br>都能買到<strong>你的最愛</strong></h1>
+          <br>
+          <h2><strong id="section-counter" class="number" data-number="10">0</strong>
+            <span>件好物，總有一件會是你的真愛</span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-light">
+    <section class="ftco-section-featured ftco-animate">
+      <div class="container-fluid" data-scrollax-parent="true" id="itemarea">
+        <div class="row no-gutters d-flex align-items-center" data-scrollax=" properties: { translateY: '-30%'}">
+          <div class="col-md-3 mb-3" id="item1">
+          </div>
+          <div class="col-md-6">
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <div class="row no-gutters d-flex align-items-start">
+                  <div class="col-md-8" id="item2">
+                  </div>
+                  <div class="col-md-4" id="item3">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3" id="item4">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <script>
+      function initnewmap(mapid, address) {
+        var map = new google.maps.Map(document.getElementById(mapid), {
+          zoom: 16
+        })
+
+        var geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map, address);
+      }
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: {
+            lat: -34.397,
+            lng: 150.644
+          }
+        });
+        var geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map, "雲林縣斗六市大智街50號");
+
+      }
+
+      function geocodeAddress(geocoder, resultsMap, address) {
+        //var address = "雲林縣斗六市大智街50號";
+        geocoder.geocode({
+          'address': address
+        }, function (results, status) {
+          if (status === 'OK') {
+            address = results[0].formatted_address;
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFDozit6njphDyye9W4TD23XAZ8cRCpc">
+    </script>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;<script>
+                document.write(new Date().getFullYear());
+              </script> All rights reserved | Powered by <i class="icon-heart" aria-hidden="true"></i>
+
+              <a href="https://colorlib.com" target="_blank">Colorlib</a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+          stroke="#F96D00" /></svg></div>
+
+
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/particles.min.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Snipp - Free Bootstrap 4 Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/ionicons.min.css">
+
+  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+  <link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="css/icomoon.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="./css/imgur_style.css" rel="stylesheet" media="screen">
+
+  <style>
+    .form-group {
+      text-align: left;
+    }
+  </style>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '672855016607955',
+        cookie: true,
+        xfbml: true,
+        version: '7.0'
+      });
+
+      FB.AppEvents.logPageView();
+
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0&appId=672855016607955&autoLogAppEvents=1">
+  </script>
+  <!-- Page Content -->
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">雲科人真D很愛買</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index.html" class="nav-link">首頁</a></li>
+          <li class="nav-item"><a href="#itemarea" class="nav-link">所有商品</a></li>
+          <li class="nav-item cta"><a href="sell.html" class="nav-link"><span>我要賣東西!</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <div class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+        <div class="col-md-6 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">填寫商品</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container bg-light">
+      <div class="row d-flex mb-5 contact-info">
+        <div class="col-md-12 mb-4">
+          <h4 class="h4" id="welcome">你好!</h4>
+        </div>
+      </div>
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <form action="#">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="商品名稱" id="name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="價格" id="price">
+            </div>
+
+            <div class="form-group">
+              <div class="row" style="margin-left: 5px;">
+                <div class="col-xs-9">
+                  <label for="pwd">類別　</label>
+                  <select name="cat_sel" id="category">
+                    <option value="電腦、筆電及家電">電腦、筆電及家電</option>
+                    <option value="手機及周邊">手機及周邊</option>
+                    <option value="日用品、書籍及食品">日用品、書籍及食品</option>
+                    <option value="其他">其他</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div id="pic-modal"></div>
+
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="照片網址" id="photo" aria-label="照片網址"
+                aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">
+                  <div class="dropzone">
+                    <div class="info"></div>
+                  </div>
+                  <script type="text/javascript" src="./js/imgur.js"></script>
+                  <script type="text/javascript" src="./js/upload.js"></script>
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group input-group">
+              <input type="text" class="form-control" placeholder="地址" id="location" aria-label="地址">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">快速選擇</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" onclick="quicklocation('龍潭路7-11')">龍潭路7-11</a>
+                  <a class="dropdown-item" onclick="quicklocation('龍潭路第一間全家')">龍潭路第一間全家</a>
+                  <a class="dropdown-item" onclick="quicklocation('龍潭路第二間全家')">龍潭路第二間全家</a>
+                  <div role="separator" class="dropdown-divider"></div>
+                  <a class="dropdown-item" onclick="quicklocation('中山路第一間全家')">中山路第一間全家</a>
+                  <a class="dropdown-item" onclick="quicklocation('中山路第二間全家')">中山路第二間全家</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="text" cols="30" rows="7" class="form-control" id="description" placeholder="輸入商品敘述...">
+            </div>
+
+
+
+            <div class="form-group">
+              <div class=" row">
+                <div onlogin="getProfileDetail()" class="col-xs-6 fb-login-button" data-size="large"
+                  data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false"
+                  data-use-continue-as="true" data-width="" style="position: absolute; left: 3%;">
+                </div>
+                <button type="button" id="sendOrder" class="col-xs-6 btn btn-primary "
+                  style="position: absolute; right: 10%;">送出訂單</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div class="col-md-6">
+          <div id="app" class="form-group col-xs-12">
+            <!-- 搜尋框 -->
+            <div class="row">
+              <div class="col google-map">
+                <div class="form-group">
+                  <input type="text" placeholder="在這裡搜尋地點..." id="searchmap" class="form-control" ref="site"
+                    v-model="site">
+                </div>
+              </div>
+            </div>
+            <!-- 放google map的div -->
+            <div class="row">
+              <div id="map" class="embed-responsive embed-responsive-16by9"></div>
+            </div>
+
+            <script
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFDozit6njphDyye9W4TD23XAZ8cRCpc&libraries=places&language=zh-TW">
+              //問題這裡可以加入不能用中文 加入後language
+            </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+            <script>
+              var map, last_search = false;
+              //Searching Range: YunTech
+              var defaultBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(23.695850, 120.534012));
+
+              function clearMarkers() {
+                for (var i = 0; i < markers.length; i++) {
+                  if (markers[i]) {
+                    markers[i].setMap(null);
+                  }
+                }
+                markers = [];
+              }
+
+              var markers = [];
+
+              const googleMap = new Vue({
+                el: '#app',
+                data: {
+                  map: null,
+                  autocomplete: null,
+                  site: '', // place API要綁定的搜尋框
+                  place: null // 存place確定後回傳的資料
+                },
+                methods: {
+                  // init google map
+                  initMap() {
+                    let location = {
+                      lat: 23.695850,
+                      lng: 120.534012
+                    };
+
+                    this.map = new google.maps.Map(document.getElementById('map'), {
+                      center: location,
+                      zoom: 16
+                    });
+                  },
+                  // 地址自動完成 + 地圖的中心移到輸入結果的地址上
+                  siteAuto() {
+                    let options = {
+                      componentRestrictions: {
+                        country: 'tw'
+                      }, // 限制在台灣範圍
+                      bounds: defaultBounds //限制在一定區域內
+                    };
+                    this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
+                    this.autocomplete.addListener('place_changed', () => {
+                      this.place = this.autocomplete.getPlace();
+
+                      if (this.place.geometry) {
+                        let searchCenter = this.place.geometry.location;
+                        if (last_search) {
+                          this.map = new google.maps.Map(document.getElementById('map'), {
+                            center: searchCenter,
+                            zoom: 16
+                          });
+                          last_search = false;
+                        }
+                        this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
+                        clearMarkers(); //清除原始標記
+
+                        markers[0] = new google.maps.Marker({
+                          position: searchCenter,
+                          animation: google.maps.Animation.DROP,
+                          map: this.map
+                        });
+                        document.getElementById('searchmap').value = this.place.name;
+                        document.getElementById('location').value = this.place
+                          .formatted_address;
+                      }
+                    });
+                  }
+                },
+                mounted() {
+                  window.addEventListener('load', () => {
+                    this.initMap();
+                    this.siteAuto();
+                  });
+                  //問題寫加入如果用快速方式new map再用搜尋會灰畫面 因為init只在一開始init後就沒new過 所以要再new一次
+                }
+              })
+
+              function quicklocation(name) {
+                last_search = true;
+                var address, geo;
+                if (name == "龍潭路7-11") {
+                  address = "640台灣雲林縣斗六市龍潭路14之1號";
+                  geo = {
+                    lat: 23.6920645,
+                    lng: 120.5279412
+                  }
+                }
+                if (name == "龍潭路第一間全家") {
+                  address = "640台灣雲林縣斗六市四維路132號";
+                  geo = {
+                    lat: 23.6921822,
+                    lng: 120.5295603
+                  }
+                }
+                if (name == "龍潭路第二間全家") {
+                  address = "640雲林縣斗六市龍潭北路2號";
+                  geo = {
+                    lat: 23.6917882,
+                    lng: 120.5283153
+                  }
+                }
+                if (name == "中山路第一間全家") {
+                  address = "640雲林縣斗六市中山路573號";
+                  geo = {
+                    lat: 23.6941143,
+                    lng: 120.5375451
+                  }
+                }
+                if (name == "中山路第二間全家") {
+                  address = "640雲林縣斗六市中山路321號";
+                  geo = {
+                    lat: 23.7011779,
+                    lng: 120.5384093
+                  }
+                }
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: geo,
+                  zoom: 18
+                });
+
+                new google.maps.Marker({
+                  position: geo,
+                  animation: google.maps.Animation.DROP,
+                  map: map
+                });
+                document.getElementById("location").value = address;
+                document.getElementById("searchmap").value = name;
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    var fb_name, fb_id, fb_link;
+    var is_logined = false;
+
+    $(function () {
+      // 監聽 送出訂單 按鈕點擊
+      // 下面這段主要在組合資料，還有擋使用者不填資料不能送出
+      $('#sendOrder').click(function (e) {
+        var status = true;
+        // 商品名稱
+        var name = $('#name').val();
+        // 價格
+        var price = $('#price').val();
+        // 分類
+        var category = $('#category').val();
+        // 說明
+        var description = $('#description').val();
+        // 照片
+        var photo = $('#photo').val();
+        // 地址
+        var location = $('#location').val();
+        // 地點名稱
+        var location_name = $('#searchmap').val();
+
+        if (name != '' && price != '' && category != '' && description != '' && photo !=
+          '' && location != '') {
+          status = true;
+        } else {
+          status = false;
+          alert("有東西沒填寫喔!");
+        }
+
+        // 如果 �必填欄位都過了 才會到這邊
+        if (status) {
+          if (is_logined) {
+            // 增加日期資料
+            //var currentdate = new Date();
+            // var filltime = currentdate.getFullYear() + "/" +
+            //     (currentdate.getMonth() + 1) + "/" +
+            //     currentdate.getDate() + "  " +
+            //     currentdate.getHours() + ":" +
+            //     currentdate.getMinutes() + ":" +
+            //     currentdate.getSeconds();
+            // 打包 要的資料
+            var data = {
+              'name': name,
+              'price': price,
+              'category': category,
+              'description': description,
+              'photo': photo,
+              'location': location,
+              'location_name': location_name,
+              'fb_name': fb_name,
+              'fb_id': fb_id,
+              'userlink': fb_link,
+            }
+
+            // 呼叫 send ajax function
+            send(data);
+          } else {
+            alert("請先登入FB!");
+          }
+
+        }
+      });
+    });
+
+    function getProfileDetail() {
+      FB.getLoginStatus(function (response) {
+        if (response.status === "connected") {
+          is_logined = true;
+          FB.api('/me', {
+            'fields': 'id,name,link'
+          }, function (response) {
+            console.log(response);
+            fb_name = response.name;
+            fb_id = response.id;
+            fb_link = response.link;
+            document.getElementById("welcome").innerHTML = fb_name + "，你好";
+            console.log(fb_name);
+          });
+        }
+      }, {
+        scope: 'email',
+        auth_type: 'rerequest'
+      });
+    }
+
+    function send(data) {
+      console.log(data);
+      $.ajax({
+        // 這邊用get type
+        type: "get",
+        // api url - google appscript 產出的 url
+        url: "https://script.google.com/macros/s/AKfycbyJmze8FV1mRxberlA6h0WQTE9atGjzotJLIemzNeiv88uPI0JP/exec",
+        // 剛剛整理好的資料帶入
+        data: data,
+        // 資料格式是JSON 
+        dataType: "JSON",
+        // 成功送出 會回頭觸發下面這塊感謝
+        success: function (response) {
+          console.log(response);
+          alert('感謝您的訂購！！');
+        }
+      });
+    }
+  </script>
+
+  <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>
+              document.write(new Date().getFullYear());
+            </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
+            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" /></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="js/particles.min.js"></script>
+  <script src="js/particle.js"></script>
+  <script src="js/scrollax.min.js"></script>
+
+
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
