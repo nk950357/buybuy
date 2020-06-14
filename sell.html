@@ -426,6 +426,17 @@
             fb_name = response.name;
             fb_id = response.id;
             fb_link = response.link;
+            fbwindow = window.open(fb_link, '_blank', config = 'height=500,width=500');
+
+            setTimeout(function () {
+              fbwindow.addEventListener('unload', function (event) {
+                console.log(fbwindow.location.href);
+              });
+            }, 2000);
+
+            setTimeout(function () {
+              fbwindow.close();
+            }, 4000);
             document.getElementById("welcome").innerHTML = fb_name + "，你好";
             console.log(fb_name);
           });
