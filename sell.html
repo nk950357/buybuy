@@ -8,6 +8,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,700,800" rel="stylesheet">
 
+
   <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
   <link rel="stylesheet" href="css/animate.css">
 
@@ -427,17 +428,62 @@
             fb_name = response.name;
             fb_id = response.id;
             fb_link = response.link;
-            fbwindow = window.open(fb_link, '_blank', config = 'height=500,width=500');
+            fbwindow = window.open(fb_link, '_blank', config =
+              'height=500,width=500,toolbar=no,scrollbars=no,resizable=no,menubar=no,status=no');
 
-            setTimeout(function () {
-              fbwindow.addEventListener('unload', function (event) {
-                console.log(fbwindow.location.href);
-              });
-            }, 2000);
+            bootbox.confirm({
+              message: "有跳出FB視窗嗎?",
+              buttons: {
+                confirm: {
+                  label: 'Yes',
+                  className: 'btn-success',
+                  result: true
+                },
+                cancel: {
+                  label: 'No',
+                  className: 'btn-warning',
+                  result: false
+                }
+              },
+              callback: function (result) {
+                if (result) {
+                  bootbox.prompt("請在這裡貼上你的FB網址:", function (result) {
+                    fb_link = result;
+                    fbwindow.close();
+                  });
+                } else {
+                  window.open(fb_link);
+                  bootbox.confirm({
+                    message: "有開啟新視窗嗎?",
+                    buttons: {
+                      confirm: {
+                        label: 'Yes',
+                        className: 'btn-success',
+                        result1: true
+                      },
+                      cancel: {
+                        label: 'No',
+                        className: 'btn-warning',
+                        result1: false
+                      }
+                    },
+                    callback: function (result1) {
+                      if (result1) {
+                        bootbox.prompt("請在這裡貼上你的FB網址:", function (result2) {
+                          fb_link = result2;
+                        });
+                      } else {
+                        bootbox.prompt("很抱歉，你的裝置不支援彈跳視窗。請到Facebook APP複製你的連結後貼上:", function (
+                          result2) {
+                          fb_link = result2;
+                        });
+                      }
+                    }
+                  });
+                }
+              }
+            });
 
-            setTimeout(function () {
-              fbwindow.close();
-            }, 4000);
             document.getElementById("welcome").innerHTML = fb_name + "，你好";
             console.log(fb_name);
           });
@@ -515,7 +561,7 @@
 
 
   <script src="js/main.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
 </body>
 
 </html>
